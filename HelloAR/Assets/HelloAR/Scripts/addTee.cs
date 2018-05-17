@@ -6,7 +6,7 @@ public class addTee : MonoBehaviour {
 
 	public GameObject water;
 	public Material tee;
-	public Material milktee;
+    public Material milktee; 
 
 	// Use this for initialization
 	void Start () {
@@ -25,5 +25,18 @@ public class addTee : MonoBehaviour {
 		} else {
 			water.GetComponent<MeshRenderer> ().material = milktee;
 		}
-    }
+
+        //for (int i = 0; i < 25; i++) {
+        //    GameObject newBall = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        //    newBall.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
+        //    newBall.transform.position = new Vector3(-0.1f + i * 0.05f, 10.0f + 2 * i, 0);
+        //    newBall.AddComponent<Rigidbody>();
+
+        //    newBall.GetComponent<Rigidbody>().useGravity = true;
+
+        //    //newBall.GetComponent<Rigidbody>().AddForce(new Vector3(0.001f, 0f, 0f));
+        //    newBall.GetComponent<MeshRenderer>().material = tee;
+         
+        //}
+       }
 }

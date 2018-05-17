@@ -1,0 +1,15 @@
+﻿<Properties StartupConfiguration="{58A26037-7964-BDC8-4A3B-E474BDEA4C98}|">
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/HelloAR/Scripts/addTee.cs">
+    <Files>
+      <File FileName="Assets/HelloAR/Scripts/addTee.cs" Line="35" Column="79" />
+      <File FileName="Assets/HelloAR/Scripts/addPearls.cs" Line="24" Column="14" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+</Properties>
