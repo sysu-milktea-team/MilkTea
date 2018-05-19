@@ -6,7 +6,7 @@ public class addTea : MonoBehaviour {
 
 	public GameObject water;
 	public Material tea;
-    public Material milktea; 
+    public Material milk; 
 
 	// Use this for initialization
 	void Start () {
@@ -19,12 +19,13 @@ public class addTea : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		if (water.active == false) {
+        
+		if (water.active == false) 
 			water.active = true;
 			water.GetComponent<MeshRenderer> ().material = tea;
-		} else {
-			water.GetComponent<MeshRenderer> ().material = milktea;
-		}
+		//} else {
+		//	water.GetComponent<MeshRenderer> ().material = milk;
+		//}
 
         //for (int i = 0; i < 25; i++) {
         //    GameObject newBall = GameObject.CreatePrimitive(PrimitiveType.Sphere);
