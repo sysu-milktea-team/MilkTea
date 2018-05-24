@@ -24,7 +24,7 @@ public class customerController : MonoBehaviour {
             if (isEnd()) {
                 kill();
 
-                this.gameObject.SetActive(false); // 只有当计时结束时才消失
+                this.gameObject.SetActive(false); // 客人模型只有当计时结束时才消失
             } else {
                 progress.GetComponent<MeshRenderer>().material.SetFloat("_Cutoff", 1 - lifestate); 
 
@@ -50,9 +50,17 @@ public class customerController : MonoBehaviour {
 
     public void run() {
         //Debug.Log(" > Customer Running.");
-        isRun = true;
+        isRun = true; 
         beginTime = Time.time;
         progress.gameObject.SetActive(true);
+        this.gameObject.SetActive(true);
         xlen = progress.GetComponent<Transform>().localScale.x;
+    } 
+    public void restart() {
+        lifestate = 0;
+        isRun = false;
+        progress.gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
+
     }
 }

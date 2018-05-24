@@ -7,16 +7,21 @@ public class TimeBar : MonoBehaviour {
 
 	public Image progress;
 	public float waitTime = 5.0f;
-	public Button button;
+    public Button button;
+    public Button replay;
+    public Button submit;
 	private bool isBegin = false;
     public Text gameOver;
     public GameObject customerGroup;
     private float beginTime;
     private float state = 0;
+    private bool isFinish = false;
 
 	// Use this for initialization
 	void Start () {
 		button.onClick.AddListener(onClicked);
+        replay.onClick.AddListener(onReplay);
+        submit.onClick.AddListener(onSubmit);
 	}
 	
 	// Update is called once per frame
@@ -31,8 +36,13 @@ public class TimeBar : MonoBehaviour {
                 gameOver.gameObject.SetActive(true);
                 customerGroup.GetComponent<CustomerSystemController>().end();
                 isBegin = false;
+                isFinish = true;
             }
 		}
+        if (isFinish) {
+            replay.GetComponent<Button>().gameObject.SetActive(true);
+            submit.GetComponent<Button>().gameObject.SetActive(false);
+        }
 	}
 
 	void onClicked() {
@@ -41,5 +51,25 @@ public class TimeBar : MonoBehaviour {
         isBegin = true;	
         button.GetComponent<Button>().gameObject.SetActive(false);
         customerGroup.GetComponent<CustomerSystemController>().run();
+
+            submit.GetComponent<Button>().gameObject.SetActive(true);
 	}
+    void onReplay() {
+        Debug.Log("> Game Restart. ");
+        state = 0;
+        isBegin = true;
+        isFinish = false;
+        beginTime = Time.time;
+        replay.GetComponent<Button>().gameObject.SetActive(false); 
+
+        gameOver.gameObject.SetActive(false);
+        gameOver.GetComponent<Text>().gameObject.SetActive(false);
+        customerGroup.GetComponent<CustomerSystemController>().run();
+        submit.GetComponent<Button>().gameObject.SetActive(true);
+    }
+    void onSubmit() {
+        Debug.Log("> Submit. ");
+        //customerGroup.submit(water.milktea);
+             
+    }
 }
