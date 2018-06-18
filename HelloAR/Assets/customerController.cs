@@ -10,14 +10,12 @@ public class customerController : MonoBehaviour {
     public float waitTime = 3.0f;
     public GameObject progress;
     private float xlen;
-    private MilkTea orderMT;
+    private MilkTea orderMT = new MilkTea();
     private bool isServed = false;
 
 
 	// Use this for initialization
 	void Start () {
-        
-        restart();
 	}
 	
 	// Update is called once per frame
@@ -27,7 +25,7 @@ public class customerController : MonoBehaviour {
             //Debug.Log(lifestate);
             if (isEnd()) {
                 kill();
-                this.gameObject.SetActive(false); // 客人模型只有当计时结束时才消失
+                this.gameObject.SetActive(false); // 客人模型只有当计时结束或成功服务时才消失
             } else {
                 progress.GetComponent<MeshRenderer>().material.SetFloat("_Cutoff", 1 - lifestate);  
                 //progress.fillAmount = 1 - lifestate;
@@ -43,7 +41,7 @@ public class customerController : MonoBehaviour {
 
     }
     public bool isEnd() {
-        return lifestate >= 1.0;
+        return isServed || lifestate >= 1.0;
     }
     public bool isRunning() {
         return isRun;
@@ -51,6 +49,8 @@ public class customerController : MonoBehaviour {
 
     public void run() {
         //Debug.Log(" > Customer Running.");
+
+        restart();
         isRun = true; 
         beginTime = Time.time;
         progress.gameObject.SetActive(true); // 显示顾客进度条
@@ -69,11 +69,14 @@ public class customerController : MonoBehaviour {
     }
     public bool serveBy(MilkTea mk) {
         bool success = false;
-        if (mk.getMilk() == orderMT.getMilk() && mk.getTea() == orderMT.getTea()) {
+        bool debug = true;
+        if ( debug ||  (mk.getMilk() == orderMT.getMilk() && mk.getTea() == orderMT.getTea())) {
             // 符合要求
             success = true;
             isServed = true;
             kill();
+
+            this.gameObject.SetActive(false); // 客人模型只有当计时结束或成功服务时才消失
         }
 
         if (!success) {
@@ -82,7 +85,8 @@ public class customerController : MonoBehaviour {
 
 
 
-        return  success;
+        //return  true; // debug
+        return success; // production
 
     }
 }

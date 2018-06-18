@@ -11,7 +11,6 @@ public class TimeBar : MonoBehaviour {
     public Button replay;
     public Button submit;
 	private bool isBegin = false;
-    public Text gameOver;
     private float beginTime;
     private float state = 0;
     private bool isFinish = false;
@@ -20,6 +19,8 @@ public class TimeBar : MonoBehaviour {
     private float selfCounter = 0;
     public GameObject customerGroup;  
     public GameObject water;
+    public Text gameOver;
+    public Text win;
 
 	// Use this for initialization
 	void Start () {
@@ -36,17 +37,34 @@ public class TimeBar : MonoBehaviour {
             state = (selfCounter - 0) / waitTime;
             //Debug.LogFormat("selfCounter={0},  state={1}", selfCounter, state);
 			progress.fillAmount = 1-state;
+
+
+
             if (progress.fillAmount <= 0.05) {
+                // 认为已经结束
                 Debug.LogFormat("gameover  - {0}", gameOver.gameObject);
                 Debug.LogFormat("gameover text  - {0}", gameOver.GetComponent<Text>().gameObject);
                 gameOver.GetComponent<Text>().gameObject.SetActive(true);
                 gameOver.gameObject.SetActive(true);
-                customerGroup.GetComponent<CustomerSystemController>().end();
                 isBegin = false;
                 isFinish = true;
             }
+
+
+            if (customerGroup.GetComponent<CustomerSystemController>().allServed() == true)
+            {
+                Debug.Log("> TIME_BAR: GAME WIN.");
+                // 在一局游戏结束之前全部服务成功
+                isFinish = true;
+                isBegin = false;
+                // 显示胜利提示信息
+                win.GetComponent<Text>().gameObject.SetActive(true);
+
+            }
+
 		}
         if (isFinish) {
+            customerGroup.GetComponent<CustomerSystemController>().end();
             replay.GetComponent<Button>().gameObject.SetActive(true);
             submit.GetComponent<Button>().gameObject.SetActive(false);
             selfBegin = 0;
@@ -55,9 +73,10 @@ public class TimeBar : MonoBehaviour {
 	}
 
 	void onClicked() {
-		Debug.Log("Clicked");
+		Debug.Log("> Start Clicked");
         beginTime = Time.time; 
         isBegin = true;
+        isFound = true;
         selfCounter = 0.0f;
         button.GetComponent<Button>().gameObject.SetActive(false);
         customerGroup.GetComponent<CustomerSystemController>().run();
@@ -75,20 +94,26 @@ public class TimeBar : MonoBehaviour {
         gameOver.GetComponent<Text>().gameObject.SetActive(false);
         customerGroup.GetComponent<CustomerSystemController>().run();
         submit.GetComponent<Button>().gameObject.SetActive(true);
+        win.GetComponent<Text>().gameObject.SetActive(false);
     }
 
     public void onLostTarget() {
+        submit.GetComponent<Button>().gameObject.SetActive(false);
         this.isFound = false;
+
 
     }
 
     public void onFoundTarget() {
         if (this.isBegin == true) {
             this.isFound = true; 
+            submit.GetComponent<Button>().gameObject.SetActive(true);
         }
     }
 
     void onSubmit() {
+         
+
         Debug.Log("> Submit. ");
 
         customerGroup.GetComponent<CustomerSystemController>().submit(water.GetComponent<WaterController>().getMilkTea());

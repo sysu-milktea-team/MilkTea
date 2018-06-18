@@ -8,7 +8,7 @@ public class CustomerSystemController : MonoBehaviour {
     // Use this for initialization
     private bool[] outOfTime;
     private int childcnt = 0;
-    private int nowRunCusId = 0;
+    private int nowRunCusId = -1;
     private int runnedCustomerCnt = 0;
     private bool isRun = false;
 
@@ -34,8 +34,7 @@ public class CustomerSystemController : MonoBehaviour {
         for (int j = 0; j < childcnt; j++) {
             outOfTime[j] = false;
         }
-        Debug.Log("> Customer system: child cnt : ");
-        Debug.Log(childcnt);
+        Debug.LogFormat("> Customer system: child cnt : {0}",childcnt);
 
 
 	}
@@ -46,8 +45,23 @@ public class CustomerSystemController : MonoBehaviour {
         //    checkPossibleCustomer();
 
         //}
+
+         
 		
 	}
+
+    public bool allServed() {
+
+        for (int i = 0; i < childcnt; i++)
+        {
+            if (outOfTime[i] == false){
+                return false;
+            }
+
+         }
+        return true;
+    }
+
     private void checkPossibleCustomer() {
         //Debug.Log("> Check Customer at [" +  Time.time  + "]");
 
@@ -65,16 +79,17 @@ public class CustomerSystemController : MonoBehaviour {
 
 
                 customerController cus = this.transform.GetChild(i).gameObject.GetComponent<customerController>();
+
+                Debug.LogFormat("> CUSTOMER_SYSTEM: cus == null:{0}, cus.isEnd():{1}, cus.isRunning()={2}, i={3}", cus == null, cus.isEnd(), cus.isRunning(), i);
+
                 if (cus == null) continue;
                 if (cus.isEnd() == true)
                 { // 客人计时结束
-                    outOfTime[i] = true;
-                    nowRunCusId = -1; // 表示当前没有在计时的客人
-                    Debug.LogFormat("> End Customer {0}", i);
-                    runnedCustomerCnt++;
+                    serveCustomer();
                     //this.gameObject.GetComponent<Transform>()
                     continue;
                 }
+
 
 
                 if (cus.isRunning() && cus.isEnd() == false)
@@ -86,8 +101,8 @@ public class CustomerSystemController : MonoBehaviour {
                 { // 客人的计时还没开始
                     if (nowRunCusId != -1 && nowRunCusId != 0) break; // 说明当前有正在计时的客人
                     Debug.LogFormat("> Run Customer {0} at Time: {1}", i, Time.time);
-                    this.transform.GetChild(i).gameObject.GetComponent<customerController>().run();
                     nowRunCusId = i;
+                    cus.run();
                     break;  
                 } 
 
@@ -97,7 +112,8 @@ public class CustomerSystemController : MonoBehaviour {
     }
     public void run() {
         Debug.Log("> Customer system is running. ");
-        InvokeRepeating("checkPossibleCustomer", 0, 2.0f); // 每隔一段时间查找一次有没有客人还没开始计时
+        Invoke("checkPossibleCustomer", 0.0f);
+        //InvokeRepeating("checkPossibleCustomer", 0, 2.0f); // 每隔一段时间查找一次有没有客人还没开始计时
         this.gameObject.SetActive(true);
         beginTime = Time.time;
         isRun = true;
@@ -124,10 +140,26 @@ public class CustomerSystemController : MonoBehaviour {
 
     }
 
+    private void serveCustomer() {
+        Debug.LogFormat("> End Customer {0}", nowRunCusId);
+        outOfTime[nowRunCusId] = true;
+        nowRunCusId = -1;
+        runnedCustomerCnt++;
+        checkPossibleCustomer();
+    }
+
     public void submit(MilkTea mk) {
-        bool isServed = this.transform.GetChild(nowRunCusId).gameObject.GetComponent<customerController>().serveBy(mk);
-        if (isServed) {
+        bool isServed = false;
+        if (nowRunCusId != -1) {
+            isServed = this.transform.GetChild(nowRunCusId).gameObject.GetComponent<customerController>().serveBy(mk);
             
+        }
+        if (isServed) {
+            //counter.GetComponent<CounterController>().addScore();
+            serveCustomer();
+            Debug.LogFormat("> CUSTOMER_SYSTEM: SERVED, already serve {0} ", runnedCustomerCnt);
+
+
         } else {
             
         }

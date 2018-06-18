@@ -5,7 +5,9 @@ using UnityEngine;
 public class MilkTea {
     private int milk = 0;
     private int tea = 0;
-    MilkTea(){}
+    public MilkTea(){
+        
+    }
 
     public void addMilk() { milk++;  }
     public void addTea() { tea++; }
@@ -40,10 +42,10 @@ public class MilkTea {
 public class WaterController : MonoBehaviour {
 
 
-    private MilkTea mk;
+    private MilkTea mk = new MilkTea();
 
 	// Use this for initialization
-	void Start () {
+    void Start () { 
         mk.reset();
 	}
 	
