@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CustomerSystemController : MonoBehaviour {
     private float beginTime;
@@ -10,7 +11,12 @@ public class CustomerSystemController : MonoBehaviour {
     private int nowRunCusId = 0;
     private int runnedCustomerCnt = 0;
     private bool isRun = false;
+
+    public GameObject counter;
+
 	void Start () {
+
+
         
         int i = 0;
 
@@ -116,6 +122,15 @@ public class CustomerSystemController : MonoBehaviour {
         }
 
 
+    }
+
+    public void submit(MilkTea mk) {
+        bool isServed = this.transform.GetChild(nowRunCusId).gameObject.GetComponent<customerController>().serveBy(mk);
+        if (isServed) {
+            
+        } else {
+            
+        }
     }
 	
 

@@ -12,22 +12,29 @@ public class TimeBar : MonoBehaviour {
     public Button submit;
 	private bool isBegin = false;
     public Text gameOver;
-    public GameObject customerGroup;
     private float beginTime;
     private float state = 0;
     private bool isFinish = false;
+    private bool isFound = false;
+    private float selfBegin = 0;
+    private float selfCounter = 0;
+    public GameObject customerGroup;  
+    public GameObject water;
 
 	// Use this for initialization
 	void Start () {
 		button.onClick.AddListener(onClicked);
         replay.onClick.AddListener(onReplay);
+
         submit.onClick.AddListener(onSubmit);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        if (isBegin) {
-            state = (Time.time - beginTime) / waitTime;
+        if (isBegin && isFound) {
+            selfCounter +=  Time.deltaTime;
+            state = (selfCounter - 0) / waitTime;
+            //Debug.LogFormat("selfCounter={0},  state={1}", selfCounter, state);
 			progress.fillAmount = 1-state;
             if (progress.fillAmount <= 0.05) {
                 Debug.LogFormat("gameover  - {0}", gameOver.gameObject);
@@ -42,17 +49,19 @@ public class TimeBar : MonoBehaviour {
         if (isFinish) {
             replay.GetComponent<Button>().gameObject.SetActive(true);
             submit.GetComponent<Button>().gameObject.SetActive(false);
+            selfBegin = 0;
+            selfCounter = 0;
         }
 	}
 
 	void onClicked() {
 		Debug.Log("Clicked");
-        beginTime = Time.time;
-        isBegin = true;	
+        beginTime = Time.time; 
+        isBegin = true;
+        selfCounter = 0.0f;
         button.GetComponent<Button>().gameObject.SetActive(false);
         customerGroup.GetComponent<CustomerSystemController>().run();
-
-            submit.GetComponent<Button>().gameObject.SetActive(true);
+        submit.GetComponent<Button>().gameObject.SetActive(true);
 	}
     void onReplay() {
         Debug.Log("> Game Restart. ");
@@ -67,9 +76,22 @@ public class TimeBar : MonoBehaviour {
         customerGroup.GetComponent<CustomerSystemController>().run();
         submit.GetComponent<Button>().gameObject.SetActive(true);
     }
+
+    public void onLostTarget() {
+        this.isFound = false;
+
+    }
+
+    public void onFoundTarget() {
+        if (this.isBegin == true) {
+            this.isFound = true; 
+        }
+    }
+
     void onSubmit() {
         Debug.Log("> Submit. ");
-        //customerGroup.submit(water.milktea);
-             
+
+        customerGroup.GetComponent<CustomerSystemController>().submit(water.GetComponent<WaterController>().getMilkTea());
+        
     }
 }

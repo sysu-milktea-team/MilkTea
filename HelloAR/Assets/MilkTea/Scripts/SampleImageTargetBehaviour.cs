@@ -13,6 +13,8 @@ namespace Sample
 {
     public class SampleImageTargetBehaviour : ImageTargetBehaviour
     {
+
+        public GameObject timeBar;
         protected override void Awake()
         {
             base.Awake();
@@ -25,11 +27,14 @@ namespace Sample
         void OnTargetFound(TargetAbstractBehaviour behaviour)
         {
             Debug.Log("Found: " + Target.Id);
+            timeBar.GetComponent<TimeBar>().onFoundTarget();
+
         }
 
         void OnTargetLost(TargetAbstractBehaviour behaviour)
         {
             Debug.Log("Lost: " + Target.Id);
+            timeBar.GetComponent<TimeBar>().onLostTarget();
         }
 
         void OnTargetLoad(ImageTargetBaseBehaviour behaviour, ImageTrackerBaseBehaviour tracker, bool status)

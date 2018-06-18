@@ -81,6 +81,7 @@
     <Compile Include="Assets\Glow11\Glow11DemoScene\Scripts\ColorChanger.cs" />
     <Compile Include="Assets\Glow11\Glow11DemoScene\Scripts\ColorChangerVertex.cs" />
     <Compile Include="Assets\Glow11\Glow11DemoScene\Scripts\Set60Fps.cs" />
+    <Compile Include="Assets\MilkTea\CounterController.cs" />
     <Compile Include="Assets\MilkTea\Scripts\addmilk.cs" />
     <Compile Include="Assets\MilkTea\Scripts\addPearls.cs" />
     <Compile Include="Assets\MilkTea\Scripts\addTea.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Assets\Supercyan Character Pack Free Sample\Scripts\CameraLogic.cs" />
     <Compile Include="Assets\Supercyan Character Pack Free Sample\Scripts\Demo.cs" />
     <Compile Include="Assets\Supercyan Character Pack Free Sample\Scripts\SimpleCharacterControl.cs" />
+    <Compile Include="Assets\WaterController.cs" />
     <None Include="Assets\Glow11\Shaders\Unity\Unlit-AlphaTest.shader" />
     <None Include="Assets\Glow11\Shaders\Unity\Normal-Bumped.shader" />
     <None Include="Assets\Glow11\_internal\Resources\PostShaders\Glow11BlurGL.shader" />

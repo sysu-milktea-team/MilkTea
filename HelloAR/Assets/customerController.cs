@@ -10,10 +10,14 @@ public class customerController : MonoBehaviour {
     public float waitTime = 3.0f;
     public GameObject progress;
     private float xlen;
+    private MilkTea orderMT;
+    private bool isServed = false;
+
+
 	// Use this for initialization
 	void Start () {
-
-                progress.GetComponent<MeshRenderer>().material.SetFloat("_Cutoff", 1); 
+        
+        restart();
 	}
 	
 	// Update is called once per frame
@@ -23,11 +27,9 @@ public class customerController : MonoBehaviour {
             //Debug.Log(lifestate);
             if (isEnd()) {
                 kill();
-
                 this.gameObject.SetActive(false); // 客人模型只有当计时结束时才消失
             } else {
-                progress.GetComponent<MeshRenderer>().material.SetFloat("_Cutoff", 1 - lifestate); 
-
+                progress.GetComponent<MeshRenderer>().material.SetFloat("_Cutoff", 1 - lifestate);  
                 //progress.fillAmount = 1 - lifestate;
             }
         }
@@ -39,7 +41,6 @@ public class customerController : MonoBehaviour {
         //Debug.Log("> Customer End. ");
         progress.gameObject.SetActive(false);
 
-        // 计时中途被打断时，客人模型不消失
     }
     public bool isEnd() {
         return lifestate >= 1.0;
@@ -52,15 +53,36 @@ public class customerController : MonoBehaviour {
         //Debug.Log(" > Customer Running.");
         isRun = true; 
         beginTime = Time.time;
-        progress.gameObject.SetActive(true);
-        this.gameObject.SetActive(true);
+        progress.gameObject.SetActive(true); // 显示顾客进度条
+        this.gameObject.SetActive(true); // 显示顾客
         xlen = progress.GetComponent<Transform>().localScale.x;
     } 
     public void restart() {
+
+        progress.GetComponent<MeshRenderer>().material.SetFloat("_Cutoff", 1);
         lifestate = 0;
         isRun = false;
         progress.gameObject.SetActive(false);
-        this.gameObject.SetActive(false);
+        this.gameObject.SetActive(false); 
+        orderMT.randomReset(7);   // 随机初始化顾客需求，奶和茶加起来是7
+        isServed = false;
+    }
+    public bool serveBy(MilkTea mk) {
+        bool success = false;
+        if (mk.getMilk() == orderMT.getMilk() && mk.getTea() == orderMT.getTea()) {
+            // 符合要求
+            success = true;
+            isServed = true;
+            kill();
+        }
+
+        if (!success) {
+            // 提交的不符合要求
+        }
+
+
+
+        return  success;
 
     }
 }
