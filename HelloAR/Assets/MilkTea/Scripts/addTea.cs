@@ -7,6 +7,7 @@ using UnityEngine;
 public class addTea : MonoBehaviour {
 
 	public GameObject water;
+
 	public Material allTea;
     public Material allMilk;
 	public Material one_of_twoTea;
@@ -79,5 +80,7 @@ public class addTea : MonoBehaviour {
 			water.GetComponent<MeshRenderer> ().material = four_of_fiveTea;
 			Debug.Log ("tea:2,milk1");
 		}
+
+
 	}
 }

@@ -33,7 +33,7 @@ namespace Sample
 
         void OnTargetLost(TargetAbstractBehaviour behaviour)
         {
-            Debug.Log("Lost: " + Target.Id);
+            //Debug.Log("Lost: " + Target.Id);
             timeBar.GetComponent<TimeBar>().onLostTarget();
         }
 

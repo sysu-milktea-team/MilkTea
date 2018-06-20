@@ -33,11 +33,12 @@ public class customerController : MonoBehaviour {
         }
 	}
     public void kill(){
-
+        // 不要在这里控制模型是否消失
         isRun = false;
         //progress.fillAmount = 0;
         //Debug.Log("> Customer End. ");
         progress.gameObject.SetActive(false);
+
 
     }
     public bool isEnd() {
@@ -51,6 +52,8 @@ public class customerController : MonoBehaviour {
         //Debug.Log(" > Customer Running.");
 
         restart();
+        this.gameObject.SetActive(true);
+
         isRun = true; 
         beginTime = Time.time;
         progress.gameObject.SetActive(true); // 显示顾客进度条
@@ -89,4 +92,9 @@ public class customerController : MonoBehaviour {
         return success; // production
 
     }
+
+	public void destroy()
+	{
+        Destroy(this.gameObject);
+	}
 }

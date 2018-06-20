@@ -12,54 +12,40 @@ public class CustomerSystemController : MonoBehaviour {
     private int runnedCustomerCnt = 0;
     private bool isRun = false;
 
+    private GameObject currentCustomer;
+
     public GameObject counter;
+    public GameObject _customer;
+    public int maxCustomer;
 
 	void Start () {
 
 
-        
-        int i = 0;
-
-        foreach (Transform child in this.transform)
-        {
-              //(child.gameObject.GetComponent<customerController>() == null) continue;
-
-            Debug.Log(child.gameObject.name);
-
-            i++;
-            childcnt++;
-        }
-
-        outOfTime = new bool[childcnt];
-        for (int j = 0; j < childcnt; j++) {
-            outOfTime[j] = false;
-        }
-        Debug.LogFormat("> Customer system: child cnt : {0}",childcnt);
 
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        //if (isRun) {
-        //    checkPossibleCustomer();
+        
 
-        //}
+        counter.GetComponent<Text>().text = "Counter: " + runnedCustomerCnt.ToString();
 
-         
+        // check customers
+
+        if (currentCustomer.GetComponent<customerController>().isEnd() == true)
+        { // 客人计时结束
+            serveCustomer();
+            currentCustomer.GetComponent<customerController>().destroy();
+            //this.gameObject.GetComponent<Transform>()
+        }
+
 		
 	}
 
     public bool allServed() {
-
-        for (int i = 0; i < childcnt; i++)
-        {
-            if (outOfTime[i] == false){
-                return false;
-            }
-
-         }
-        return true;
+ 
+        return runnedCustomerCnt >=  maxCustomer;
     }
 
     private void checkPossibleCustomer() {
@@ -102,6 +88,10 @@ public class CustomerSystemController : MonoBehaviour {
                     if (nowRunCusId != -1 && nowRunCusId != 0) break; // 说明当前有正在计时的客人
                     Debug.LogFormat("> Run Customer {0} at Time: {1}", i, Time.time);
                     nowRunCusId = i;
+
+
+
+
                     cus.run();
                     break;  
                 } 
@@ -112,7 +102,8 @@ public class CustomerSystemController : MonoBehaviour {
     }
     public void run() {
         Debug.Log("> Customer system is running. ");
-        Invoke("checkPossibleCustomer", 0.0f);
+        //Invoke("checkPossibleCustomer", 0.0f);
+        Invoke("createCustomer", 0.0f);
         //InvokeRepeating("checkPossibleCustomer", 0, 2.0f); // 每隔一段时间查找一次有没有客人还没开始计时
         this.gameObject.SetActive(true);
         beginTime = Time.time;
@@ -136,33 +127,50 @@ public class CustomerSystemController : MonoBehaviour {
             if (cus == null) continue;
             cus.kill();
         }
+        runnedCustomerCnt = 0;
 
 
     }
 
     private void serveCustomer() {
         Debug.LogFormat("> End Customer {0}", nowRunCusId);
-        outOfTime[nowRunCusId] = true;
-        nowRunCusId = -1;
+        //outOfTime[nowRunCusId] = true;
+        //nowRunCusId = -1;
         runnedCustomerCnt++;
-        checkPossibleCustomer();
+        //checkPossibleCustomer();
+        if (currentCustomer) currentCustomer.GetComponent<customerController>().destroy();
+        currentCustomer = null;
+        if (runnedCustomerCnt < maxCustomer) {
+            createCustomer();
+        }
     }
 
     public void submit(MilkTea mk) {
         bool isServed = false;
-        if (nowRunCusId != -1) {
-            isServed = this.transform.GetChild(nowRunCusId).gameObject.GetComponent<customerController>().serveBy(mk);
+        if (currentCustomer != null) {
+            isServed = currentCustomer.GetComponent<customerController>().serveBy(mk);
             
         }
         if (isServed) {
             //counter.GetComponent<CounterController>().addScore();
             serveCustomer();
             Debug.LogFormat("> CUSTOMER_SYSTEM: SERVED, already serve {0} ", runnedCustomerCnt);
-
-
         } else {
-            
+            // 如果提交的奶茶不符合当前客人的要求
         }
+    }
+
+    private void createCustomer() {
+
+        GameObject clone = Instantiate(_customer, _customer.transform.position, _customer.transform.rotation);
+
+        GameObject container = this.gameObject;
+
+        clone.transform.parent = container.transform;
+        clone.transform.localScale = _customer.transform.localScale;
+        clone.GetComponent<customerController>().run();
+        currentCustomer = clone;
+
     }
 	
 

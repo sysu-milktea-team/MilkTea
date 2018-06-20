@@ -296,4 +296,3 @@
 /Users/macbookpro/Documents/code/MilkTea/HelloAR/obj/Debug/Assembly-CSharp-Editor.dll
 /Users/macbookpro/Documents/code/MilkTea/HelloAR/obj/Debug/Assembly-CSharp-Editor.pdb
 /Users/macbookpro/Documents/code/MilkTea/HelloAR/Temp/bin/Debug/UnityEditor.Android.Extensions.dll
-/Users/macbookpro/Documents/code/MilkTea/HelloAR/Temp/bin/Debug/Assembly-UnityScript.dll.mdb

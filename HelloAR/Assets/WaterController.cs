@@ -1,19 +1,19 @@
 ﻿using System.Collections;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MilkTea {
-    private int milk = 0;
-    private int tea = 0;
+    
     public MilkTea(){
         
     }
 
-    public void addMilk() { milk++;  }
-    public void addTea() { tea++; }
+    public void addMilk() { amount.milkNum++;  }
+    public void addTea() { amount.teaNum++; }
     public void reset() {
-        milk = 0;
-        tea = 0;
+        amount.milkNum = 0;
+        amount.teaNum = 0;
     }
     public void randomReset(int total){
         int seed = Mathf.FloorToInt(total * Random.Range(0.0f, 1.0f));
@@ -32,8 +32,8 @@ public class MilkTea {
         
     }
 
-    public int getMilk() { return milk; }
-    public int getTea() { return tea; }
+    public int getMilk() { return amount.milkNum; }
+    public int getTea() { return amount.teaNum; }
         
 
 
@@ -44,6 +44,10 @@ public class WaterController : MonoBehaviour {
 
     private MilkTea mk = new MilkTea();
 
+    public GameObject TeaText;
+    public GameObject MilkText;
+    public GameObject water;
+
 	// Use this for initialization
     void Start () { 
         mk.reset();
@@ -51,10 +55,19 @@ public class WaterController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        //Debug.LogFormat("udpate water {0}", Time.time);
+        MilkText.GetComponent<Text>().text = "Milk: " +  mk.getMilk().ToString();
+        TeaText.GetComponent<Text>().text = "Tea: " +  mk.getTea().ToString();
 	}
 
     public MilkTea getMilkTea() {
+        
         return mk;
     }
+
+	public void reset()
+	{
+        water.SetActive(false);
+        mk.reset();
+	}
 }

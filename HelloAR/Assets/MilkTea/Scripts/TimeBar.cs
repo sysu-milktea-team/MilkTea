@@ -5,22 +5,26 @@ using UnityEngine.UI;
 
 public class TimeBar : MonoBehaviour {
 
-	public Image progress;
-	public float waitTime = 5.0f;
-    public Button button;
-    public Button replay;
-    public Button submit;
-	private bool isBegin = false;
+
+    private bool isBegin = false;
     private float beginTime;
     private float state = 0;
     private bool isFinish = false;
     private bool isFound = false;
     private float selfBegin = 0;
     private float selfCounter = 0;
+
+	public Image progress;
+	public float waitTime = 5.0f;
+    public Button button;
+    public Button replay;
+    public Button submit;
     public GameObject customerGroup;  
     public GameObject water;
     public Text gameOver;
     public Text win;
+    public GameObject TeaButton;
+    public GameObject MilkButton;
 
 	// Use this for initialization
 	void Start () {
@@ -32,7 +36,16 @@ public class TimeBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (isBegin && isFound) {
+
+        bool begins = isBegin && isFound;
+        TeaButton.SetActive(begins);
+        MilkButton.SetActive(begins);
+        //Debug.LogFormat("> TIME-BAR: begins = {0}", begins);
+
+
+        if (begins) {
+
+
             selfCounter +=  Time.deltaTime;
             state = (selfCounter - 0) / waitTime;
             //Debug.LogFormat("selfCounter={0},  state={1}", selfCounter, state);
@@ -73,7 +86,8 @@ public class TimeBar : MonoBehaviour {
 	}
 
 	void onClicked() {
-		Debug.Log("> Start Clicked");
+        Debug.Log("> Start Clicked");
+        water.GetComponent<WaterController>().reset();
         beginTime = Time.time; 
         isBegin = true;
         isFound = true;
@@ -84,6 +98,7 @@ public class TimeBar : MonoBehaviour {
 	}
     void onReplay() {
         Debug.Log("> Game Restart. ");
+        water.GetComponent<WaterController>().reset();
         state = 0;
         isBegin = true;
         isFinish = false;
@@ -117,6 +132,8 @@ public class TimeBar : MonoBehaviour {
         Debug.Log("> Submit. ");
 
         customerGroup.GetComponent<CustomerSystemController>().submit(water.GetComponent<WaterController>().getMilkTea());
+
+        water.GetComponent<WaterController>().reset();
         
     }
 }
