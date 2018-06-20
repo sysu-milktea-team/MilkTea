@@ -2,15 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+
 public class addTea : MonoBehaviour {
 
 	public GameObject water;
-	public Material tea;
-    public Material milk; 
+	public Material allTea;
+    public Material allMilk;
+	public Material one_of_twoTea;
+	public Material one_of_threeTea;
+	public Material two_of_threeTea;
+	public Material three_of_fourTea;
+	public Material one_of_fourTea;
+	public Material one_of_fiveTea;
+	public Material two_of_fiveTea;
+	public Material three_of_fiveTea;
+	public Material four_of_fiveTea;
 
 	// Use this for initialization
 	void Start () {
-		
 	}
 	
 	// Update is called once per frame
@@ -19,25 +29,55 @@ public class addTea : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-        
-		if (water.active == false) 
+		if (water.active == false) {
 			water.active = true;
-			water.GetComponent<MeshRenderer> ().material = tea;
-		//} else {
-		//	water.GetComponent<MeshRenderer> ().material = milk;
-		//}
+			water.GetComponent<MeshRenderer> ().material = allTea;
+			amount.teaNum = 1;
+			amount.milkNum = 0;
+		} else {
+			if (amount.teaNum + amount.milkNum < 5) {
+				amount.teaNum++;
 
-        //for (int i = 0; i < 25; i++) {
-        //    GameObject newBall = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        //    newBall.transform.localScale = new Vector3(0.25f, 0.25f, 0.25f);
-        //    newBall.transform.position = new Vector3(-0.1f + i * 0.05f, 10.0f + 2 * i, 0);
-        //    newBall.AddComponent<Rigidbody>();
+				Vector3 pos = water.GetComponent < Transform> ().position;
+				pos.y = pos.y+0.25f;
+				water.GetComponent<Transform> ().position = pos;
 
-        //    newBall.GetComponent<Rigidbody>().useGravity = true;
+				Vector3 scal = water.GetComponent < Transform> ().localScale;
+				scal.y = scal.y+0.5f;
+				water.GetComponent<Transform> ().localScale = scal;
+			}
+		}
 
-        //    //newBall.GetComponent<Rigidbody>().AddForce(new Vector3(0.001f, 0f, 0f));
-        //    newBall.GetComponent<MeshRenderer>().material = tea;
-         
-        //}
-       }
+		if (amount.teaNum != 0 && amount.milkNum == 0) {
+			water.GetComponent<MeshRenderer> ().material = allTea;
+			Debug.Log ("tea:1or2or3,milk0");
+		} else if (amount.teaNum == 1 && amount.milkNum == 1) {
+			water.GetComponent<MeshRenderer> ().material = one_of_twoTea;
+			Debug.Log ("tea:1,milk1");
+		} else if (amount.teaNum == 1 && amount.milkNum == 2) {
+			water.GetComponent<MeshRenderer> ().material = one_of_threeTea;
+			Debug.Log ("tea:1,milk2");
+		} else if (amount.teaNum == 2 && amount.milkNum == 1) {
+			water.GetComponent<MeshRenderer> ().material = two_of_threeTea;
+			Debug.Log ("tea:2,milk1");
+		} else if (amount.teaNum == 3 && amount.milkNum == 1) {
+			water.GetComponent<MeshRenderer> ().material = three_of_fourTea;
+			Debug.Log ("tea:3,milk1");
+		} else if (amount.teaNum == 1 && amount.milkNum == 3) {
+			water.GetComponent<MeshRenderer> ().material = one_of_fourTea;
+			Debug.Log ("tea:1,milk3");
+		} else if (amount.teaNum == 1 && amount.milkNum == 4) {
+			water.GetComponent<MeshRenderer> ().material = one_of_fiveTea;
+			Debug.Log ("tea:1,milk4");
+		} else if (amount.teaNum == 2 && amount.milkNum == 3) {
+			water.GetComponent<MeshRenderer> ().material = two_of_fiveTea;
+			Debug.Log ("tea:2,milk4");
+		} else if (amount.teaNum == 3 && amount.milkNum == 2) {
+			water.GetComponent<MeshRenderer> ().material = three_of_fiveTea;
+			Debug.Log ("tea:3,milk4:");
+		} else if (amount.teaNum == 4 && amount.milkNum == 1) {
+			water.GetComponent<MeshRenderer> ().material = four_of_fiveTea;
+			Debug.Log ("tea:2,milk1");
+		}
+	}
 }

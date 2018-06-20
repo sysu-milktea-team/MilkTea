@@ -3,7 +3,14 @@ guid: 58308089b65d2402db691fcd9ebe2c59
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
+    100000: default
+    100002: //RootNode
+    400000: default
+    400002: //RootNode
+    2300000: default
+    3300000: default
     4300000: default
+    11100000: //RootNode
   externalObjects: {}
   materials:
     importMaterials: 0
@@ -23,7 +30,6 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
-    importConstraints: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
