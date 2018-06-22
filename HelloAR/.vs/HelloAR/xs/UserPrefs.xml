@@ -1,13 +1,13 @@
 ﻿<Properties StartupConfiguration="{58A26037-7964-BDC8-4A3B-E474BDEA4C98}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/CustomerSystemController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/MilkTea/Scripts/TimeBar.cs">
     <Files>
       <File FileName="Assets/MilkTea/Scripts/addTea.cs" Line="41" Column="17" />
       <File FileName="Assets/WaterController.cs" Line="59" Column="30" />
-      <File FileName="Assets/MilkTea/Scripts/TimeBar.cs" Line="25" Column="21" />
+      <File FileName="Assets/MilkTea/Scripts/TimeBar.cs" Line="41" Column="30" />
       <File FileName="Assets/MilkTea/Scripts/addmilk.cs" Line="1" Column="1" />
-      <File FileName="Assets/CustomerSystemController.cs" Line="101" Column="31" />
-      <File FileName="Assets/customerController.cs" Line="58" Column="44" />
+      <File FileName="Assets/CustomerSystemController.cs" Line="165" Column="109" />
+      <File FileName="Assets/customerController.cs" Line="36" Column="25" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
