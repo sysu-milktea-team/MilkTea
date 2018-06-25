@@ -59,6 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\_MK\MKGlassFree\MKGlassFreeMaterialHelper.cs" />
     <Compile Include="Assets\customerController.cs" />
     <Compile Include="Assets\CustomerSystemController.cs" />
     <Compile Include="Assets\customerTimerBar.cs" />
@@ -106,9 +107,12 @@
     <None Include="Assets\Glow11\Shaders\Unity\Mobile\Mobile-Bumped.shader" />
     <None Include="Assets\Glow11\Shaders\Unity\Mobile\Mobile-BumpSpec-1DirectionalLight.shader" />
     <None Include="Assets\Glow11\Shaders\Unity\Reflect-BumpSpec.shader" />
+    <None Include="Assets\_MK\MKGlassFree\Shader\MKGlassCommonFree.shader" />
+    <None Include="Assets\_MK\MKGlassFree\Shader\Inc\Common\MKGlassInc.cginc" />
     <None Include="Assets\Glow11\readme.txt" />
     <None Include="Assets\Glow11\_internal\Resources\Shaders\Glow11GlowObjects.shader" />
     <None Include="Assets\Glow11\Shaders\Unity\Reflect-VertexLit.shader" />
+    <None Include="Assets\_MK\MKGlassFree\Shader\Inc\Meta\MKGlassMetaIO.cginc" />
     <None Include="Assets\Glow11\Shaders\Unity\Alpha-Parallax.shader" />
     <None Include="Assets\Glow11\Shaders\Unity\Alpha-BumpSpec.shader" />
     <None Include="Assets\Glow11\Shaders\Unity\AlphaTest-BumpSpec.shader" />
@@ -116,15 +120,25 @@
     <None Include="Assets\Glow11\Shaders\Unity\Unlit-Color.shader" />
     <None Include="Assets\Glow11\Shaders\Unity\Reflect-ParallaxSpec.shader" />
     <None Include="Assets\Glow11\Shaders\Unity\Illumin-ParallaxSpec.shader" />
+    <None Include="Assets\_MK\MKGlassFree\Shader\Inc\Surface\MKGlassSurface.cginc" />
+    <None Include="Assets\_MK\MKGlassFree\Shader\Inc\Meta\MKGlassMeta.cginc" />
     <None Include="Assets\Glow11\Shaders\Unity\Alpha-Glossy.shader" />
+    <None Include="Assets\_MK\MKGlassFree\Shader\Inc\Common\MKGlassLight.cginc" />
     <None Include="Assets\Glow11\Shaders\Unity\AlphaTest-Diffuse.shader" />
+    <None Include="Assets\_MK\MKGlassFree\Shader\Inc\Forward\MKGlassForward.cginc" />
+    <None Include="Assets\_MK\MKGlassFree\Shader\Inc\VertexLit\MKGlassVertexLitIO.cginc" />
+    <None Include="Assets\_MK\MKGlassFree\Shader\Inc\Forward\MKGlassForwardIO.cginc" />
     <None Include="Assets\Glow11\_internal\Resources\PostShaders\BlurEffectConeTap.shader" />
+    <None Include="Assets\_MK\MKGlassFree\Shader\Inc\Common\MKGlassDef.cginc" />
     <None Include="Assets\Glow11\_internal\Resources\PostShaders\Glow11ComposeMaxFallback.shader" />
+    <None Include="Assets\_MK\MKGlassFree\Shader\Inc\Common\MKGlassV.cginc" />
+    <None Include="Assets\_MK\MKGlassFree\Shader\MKGlassFree.shader" />
     <None Include="Assets\Glow11\_internal\AdvancedBlur.cginc" />
     <None Include="Assets\Glow11\Shaders\Unity\AlphaTest-VertexLit.shader" />
     <None Include="Assets\Glow11\Shaders\Unity\Reflect-Glossy.shader" />
     <None Include="Assets\Glow11\Shaders\Unity\Normal-ParallaxSpec.shader" />
     <None Include="Assets\Glow11\Shaders\Unity\Illumin-BumpSpec.shader" />
+    <None Include="Assets\_MK\MKGlassFree\Shader\Inc\Forward\MKGlassForwardAddSetup.cginc" />
     <None Include="Assets\Glow11\Shaders\Unity\Reflect-BumpNolight.shader" />
     <None Include="Assets\Glow11\Shaders\Unity\Illumin-VertexLit.shader" />
     <None Include="Assets\Glow11\Shaders\Unity\Mobile\Mobile-VertexLit.shader" />
@@ -148,17 +162,20 @@
     <None Include="Assets\Glow11\Shaders\Unity\Reflect-Diffuse.shader" />
     <None Include="Assets\Glow11\Shaders\Unity\Illumin-Bumped.shader" />
     <None Include="Assets\Glow11\_internal\Resources\PostShaders\Glow11AdvancedBlur.shader" />
+    <None Include="Assets\_MK\MKGlassFree\Shader\Inc\Forward\MKGlassForwardBaseSetup.cginc" />
     <None Include="Assets\Glow11\Shaders\Unity\Particle Alpha Blend.shader" />
     <None Include="Assets\MilkTea\Scripts\glass.shader" />
     <None Include="Assets\Glow11\Shaders\Unity\Mobile\Mobile-Diffuse.shader" />
     <None Include="Assets\Glow11\Shaders\Unity\Mobile\Mobile-Lightmap-Unlit.shader" />
     <None Include="Assets\Glow11\Shaders\Unity\Mobile\Mobile-Particle-Alpha-VertexLit.shader" />
     <None Include="Assets\Glow11\Shaders\Unity\Normal-BumpSpec.shader" />
+    <None Include="Assets\_MK\MKGlassFree\Shader\Inc\Meta\MKGlassMetaSetup.cginc" />
     <None Include="Assets\Glow11\Shaders\Unity\AlphaTest-SoftEdgeUnlit.shader" />
     <None Include="Assets\Glow11\Shaders\Unity\Normal-Parallax.shader" />
     <None Include="Assets\Glow11\Shaders\Unity\Unlit-Alpha.shader" />
     <None Include="Assets\Glow11\_internal\Resources\PostShaders\Glow11Downsample.shader" />
     <None Include="Assets\Glow11\_internal\Resources\PostShaders\Glow11Compose.shader" />
+    <None Include="Assets\_MK\MKGlassFree\Shader\Inc\VertexLit\MKGlassVertexLitSetup.cginc" />
     <None Include="Assets\Glow11\Shaders\Unity\Mobile\Mobile-BumpSpec.shader" />
     <None Include="Assets\MilkTea\Scripts\water.shader" />
     <None Include="Assets\EasyAR\Resources\Shaders\RealityPlane.shader" />
@@ -168,12 +185,14 @@
     <None Include="Assets\EasyAR\doc\changelog.en.txt" />
     <None Include="Assets\Glow11\Shaders\Unity\Mobile\Mobile-VertexLit-OnlyDirectionalLights.shader" />
     <None Include="Assets\Glow11\_internal\Resources\PostShaders\Glow11Blur.shader" />
+    <None Include="Assets\_MK\MKGlassFree\Shader\Inc\VertexLit\MKGlassVertexLit.cginc" />
+    <None Include="Assets\_MK\MKGlassFree\Shader\Inc\Surface\MKGlassSurfaceIO.cginc" />
     <None Include="Assets\Glow11\Shaders\Unity\Mobile\Mobile-Particle-Alpha.shader" />
-    <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>/Users/macbookpro/Documents/code/MilkTea/HelloAR/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>/Users/macbookpro/Documents/code/MilkTea/HelloAR/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.StandardEvents">
+      <HintPath>/Users/macbookpro/Documents/code/MilkTea/HelloAR/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

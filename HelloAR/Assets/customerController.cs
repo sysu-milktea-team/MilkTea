@@ -3,6 +3,54 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+public class CustomerMilkTea
+{
+    // should be singleton.
+    private int PEARL = 0, BOBA = 1, MILK = 2;
+    private int sidefood = -1;
+
+    private int milkNum, teaNum;
+    public CustomerMilkTea()
+    {
+        milkNum = 0;
+        teaNum = 0;
+    }
+
+    public void addMilk() {  milkNum++; }
+    public void addTea() {  teaNum++; }
+    public void reset()
+    {
+         milkNum = 0;
+         teaNum = 0;
+    }
+    public void randomReset(int total)
+    {
+        int seed = Mathf.FloorToInt(total * Random.Range(0.0f, 0.99f));
+        sidefood = Mathf.FloorToInt(3 * Random.Range(0.0f, 0.99f));
+        for (int i = 0; i < total; i++)
+        {
+            if (i < seed)
+            {
+                addMilk();
+            }
+            else
+            {
+                addTea();
+
+            }
+        }
+
+    }
+
+    public int getMilk() { return  milkNum; }
+    public int getTea() { return  teaNum; }
+    public int getSideFood() { return sidefood; }
+
+
+
+}
+
 public class customerController : MonoBehaviour {
     private bool isRun = false;
     private float beginTime;
@@ -10,7 +58,7 @@ public class customerController : MonoBehaviour {
     public float waitTime = 3.0f;
     public GameObject progress;
     private float xlen;
-    private MilkTea orderMT = new MilkTea();
+    private CustomerMilkTea orderMT = new CustomerMilkTea();
     private bool isServed = false;
 
 
@@ -52,34 +100,37 @@ public class customerController : MonoBehaviour {
         //Debug.Log(" > Customer Running.");
 
         restart();
-        this.gameObject.SetActive(true);
 
         isRun = true; 
         beginTime = Time.time;
         progress.gameObject.SetActive(true); // 显示顾客进度条
         this.gameObject.SetActive(true); // 显示顾客
+
         xlen = progress.GetComponent<Transform>().localScale.x;
     } 
-    public void restart() {
+    private void restart() {
 
         progress.GetComponent<MeshRenderer>().material.SetFloat("_Cutoff", 1);
         lifestate = 0;
+        beginTime = Time.time;
         isRun = false;
         progress.gameObject.SetActive(false);
-        this.gameObject.SetActive(false); 
-        orderMT.randomReset(7);   // 随机初始化顾客需求，奶和茶加起来是7
+        //this.gameObject.SetActive(false);
+         
+        orderMT.randomReset(5);   // 随机初始化顾客需求，奶和茶加起来是5
         isServed = false;
     }
     public bool serveBy(MilkTea mk) {
         bool success = false;
         bool debug = true;
-        if ( debug ||  (mk.getMilk() == orderMT.getMilk() && mk.getTea() == orderMT.getTea())) {
+        if ( debug || 
+            (mk.getMilk() == orderMT.getMilk() && mk.getTea() == orderMT.getTea()
+             && mk.getSideFood() == orderMT.getSideFood()) ) {
             // 符合要求
             success = true;
             isServed = true;
             kill();
 
-            this.gameObject.SetActive(false); // 客人模型只有当计时结束或成功服务时才消失
         }
 
         if (!success) {
@@ -88,8 +139,7 @@ public class customerController : MonoBehaviour {
 
 
 
-        //return  true; // debug
-        return success; // production
+        return debug || success; // production
 
     }
 

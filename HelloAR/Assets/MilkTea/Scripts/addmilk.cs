@@ -28,25 +28,13 @@ public class addmilk : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		if (water.active == false) {
-			water.active = true;
-			water.GetComponent<MeshRenderer> ().material = allMilk;
-			amount.teaNum = 0;
-			amount.milkNum = 1;
-		} else {
-			if (amount.teaNum + amount.milkNum < 5) {
-				amount.milkNum++;
 
-				Vector3 pos = water.GetComponent < Transform> ().position;
-				pos.y = pos.y+0.25f;
-				water.GetComponent<Transform> ().position = pos;
+        if (amount.teaNum + amount.milkNum < 5)
+        {
 
-				Vector3 scal = water.GetComponent < Transform> ().localScale;
-				scal.y = scal.y+0.5f;
-				water.GetComponent<Transform> ().localScale = scal;
-			}
-		}
+            amount.milkNum++;
 
+        }
 		if (amount.teaNum == 0 && amount.milkNum != 0) {
 			water.GetComponent<MeshRenderer> ().material = allMilk;
 			Debug.Log ("tea:0,milk:1or2or3");

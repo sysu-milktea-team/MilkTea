@@ -7,6 +7,7 @@ public class addPearls : MonoBehaviour {
 
 	public GameObject water;
 	public GameObject pearls;
+    public int SideFoodEnumVal;
 
     // Use this for initialization
     void Awake () {
@@ -19,9 +20,15 @@ public class addPearls : MonoBehaviour {
 
     }
     void myClick(){
-        Debug.Log("Hello world");
+         int PEARL = 0, BOBA = 1, MILK = 2;
+         
+        Debug.Log("add pearls");
         if (water.active == true) {
 			pearls.active = true;
 		}
+
+
+        water.GetComponent<WaterController>().changeSideFood(SideFoodEnumVal);
+
     }
 }

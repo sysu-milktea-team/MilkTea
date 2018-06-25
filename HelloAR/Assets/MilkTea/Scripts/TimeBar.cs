@@ -30,7 +30,6 @@ public class TimeBar : MonoBehaviour {
 	void Start () {
 		button.onClick.AddListener(onClicked);
         replay.onClick.AddListener(onReplay);
-
         submit.onClick.AddListener(onSubmit);
 	}
 	
@@ -53,7 +52,7 @@ public class TimeBar : MonoBehaviour {
 
 
 
-            if (progress.fillAmount <= 0.05) {
+            if (progress.fillAmount <= 0.005) {
                 // 认为已经结束
                 Debug.LogFormat("gameover  - {0}", gameOver.gameObject);
                 Debug.LogFormat("gameover text  - {0}", gameOver.GetComponent<Text>().gameObject);
@@ -87,7 +86,6 @@ public class TimeBar : MonoBehaviour {
 
 	void onClicked() {
         Debug.Log("> Start Clicked");
-        water.GetComponent<WaterController>().reset();
         beginTime = Time.time; 
         isBegin = true;
         isFound = true;
@@ -98,7 +96,6 @@ public class TimeBar : MonoBehaviour {
 	}
     void onReplay() {
         Debug.Log("> Game Restart. ");
-        water.GetComponent<WaterController>().reset();
         state = 0;
         isBegin = true;
         isFinish = false;
@@ -133,7 +130,6 @@ public class TimeBar : MonoBehaviour {
 
         customerGroup.GetComponent<CustomerSystemController>().submit(water.GetComponent<WaterController>().getMilkTea());
 
-        water.GetComponent<WaterController>().reset();
         
     }
 }

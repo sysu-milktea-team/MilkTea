@@ -30,24 +30,15 @@ public class addTea : MonoBehaviour {
 	}
 
 	void OnMouseDown() {
-		if (water.active == false) {
-			water.active = true;
-			water.GetComponent<MeshRenderer> ().material = allTea;
-			amount.teaNum = 1;
-			amount.milkNum = 0;
-		} else {
-			if (amount.teaNum + amount.milkNum < 5) {
-				amount.teaNum++;
+        
 
-				Vector3 pos = water.GetComponent < Transform> ().position;
-				pos.y = pos.y+0.25f;
-				water.GetComponent<Transform> ().position = pos;
 
-				Vector3 scal = water.GetComponent < Transform> ().localScale;
-				scal.y = scal.y+0.5f;
-				water.GetComponent<Transform> ().localScale = scal;
-			}
-		}
+            if (amount.teaNum + amount.milkNum < 5)
+        {
+            amount.teaNum++;
+
+ 
+        }
 
 		if (amount.teaNum != 0 && amount.milkNum == 0) {
 			water.GetComponent<MeshRenderer> ().material = allTea;
