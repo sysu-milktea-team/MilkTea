@@ -4,4 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/MilkTea/Scenes/HelloAR.unity
+    guid: 2e0b99d65d34aa04d939612a84171b32
+  m_configObjects: {}
