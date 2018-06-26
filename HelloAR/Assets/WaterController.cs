@@ -46,9 +46,14 @@ public class WaterController : MonoBehaviour {
 
     public GameObject pearls, boba, milkgai;
 
+    public Button redo;
+
+
 	// Use this for initialization
     void Start () { 
         mk.reset();
+        redo.onClick.AddListener(reset);
+
 	}
 	
 	// Update is called once per frame
@@ -63,6 +68,8 @@ public class WaterController : MonoBehaviour {
         int totalNum = amount.teaNum + amount.milkNum;
 
         GameObject water = this.gameObject;
+
+        //
 
         //Vector3 oldpos = water.GetComponent<Transform>().position;
         //Vector3 pos = new Vector3(oldpos.x, oldpos.y, oldpos.z);

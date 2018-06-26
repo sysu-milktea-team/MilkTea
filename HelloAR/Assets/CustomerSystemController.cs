@@ -16,7 +16,7 @@ public class CustomerSystemController : MonoBehaviour {
 
     public GameObject counter;
     public GameObject water;
-    public GameObject _customer;
+    public GameObject[] _customers;
     public int targetCustomerNumber;
 
 	void Start () {
@@ -25,9 +25,21 @@ public class CustomerSystemController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        
 
-        counter.GetComponent<Text>().text = "Counter: " + successCustomerCnt.ToString();
+
+        int totalNum = amount.teaNum + amount.milkNum;
+
+        if (totalNum == 0)
+        {
+            water.SetActive(false);
+        }
+        else
+        {
+            water.SetActive(true);
+        } 
+
+
+        counter.GetComponent<Text>().text = "Score: " + successCustomerCnt.ToString();
 
         // check customers
 
@@ -103,7 +115,7 @@ public class CustomerSystemController : MonoBehaviour {
         currentCustomer = null;
 
 
-        if (successCustomerCnt < targetCustomerNumber)
+        //if (successCustomerCnt < targetCustomerNumber)
         {
             createCustomer();
         }
@@ -121,12 +133,20 @@ public class CustomerSystemController : MonoBehaviour {
             successCustomerCnt++;
             //counter.GetComponent<CounterController>().addScore(); 
             Debug.LogFormat("> CUSTOMER_SYSTEM: SERVED, already serve {0} ", successCustomerCnt);
+            servedCustomer();
+
         } else {
             // 如果提交的奶茶不符合当前客人的要求
+
+
         }
         // 客人模型被服务时消失，不管是否得到了正确的奶茶
         // 只要点击了提交 客人就会消失
-        servedCustomer();
+
+        if (currentCustomer.GetComponent<customerController>().isEnd() == true) {
+            servedCustomer();
+
+        }
 
         water.GetComponent<WaterController>().reset();
     }
@@ -136,6 +156,8 @@ public class CustomerSystemController : MonoBehaviour {
         if (!isRun) return;
 
         Debug.Log("> CUS_SYS: Creating customer.");
+        int ptr = Mathf.FloorToInt(_customers.Length * Random.Range(0.0f, 0.99f));
+        GameObject _customer = _customers[ptr];
 
         GameObject clone = Instantiate(_customer, _customer.transform.position, _customer.transform.rotation);
 

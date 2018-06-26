@@ -60,7 +60,7 @@ public class customerController : MonoBehaviour {
     private float xlen;
     private CustomerMilkTea orderMT = new CustomerMilkTea();
     private bool isServed = false;
-
+    private float punishDelta = 0;
 
 	// Use this for initialization
 	void Start () {
@@ -69,7 +69,7 @@ public class customerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (isRun) {
-            lifestate = (Time.time - beginTime) / waitTime;
+            lifestate = (Time.time - beginTime) / waitTime + punishDelta;
             //Debug.Log(lifestate);
             if (isEnd()) {
                 kill();
@@ -117,12 +117,12 @@ public class customerController : MonoBehaviour {
         progress.gameObject.SetActive(false);
         //this.gameObject.SetActive(false);
          
-        orderMT.randomReset(5);   // 随机初始化顾客需求，奶和茶加起来是5
+        orderMT.randomReset(Mathf.FloorToInt(Random.Range(3.0f, 5.9f)));   // 随机初始化顾客需求，奶和茶加起来是3到5份
         isServed = false;
     }
     public bool serveBy(MilkTea mk) {
         bool success = false;
-        bool debug = true;
+        bool debug = !true;
         if ( debug || 
             (mk.getMilk() == orderMT.getMilk() && mk.getTea() == orderMT.getTea()
              && mk.getSideFood() == orderMT.getSideFood()) ) {
@@ -135,6 +135,7 @@ public class customerController : MonoBehaviour {
 
         if (!success) {
             // 提交的不符合要求
+
         }
 
 
