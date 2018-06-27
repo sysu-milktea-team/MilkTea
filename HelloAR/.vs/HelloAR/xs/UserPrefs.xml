@@ -1,6 +1,6 @@
 ﻿<Properties StartupConfiguration="{58A26037-7964-BDC8-4A3B-E474BDEA4C98}|">
   <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="Unity.Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/WaterController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/MilkTea/Scripts/addTea.cs">
     <Files>
       <File FileName="Assets/MilkTea/Scripts/addTea.cs" Line="36" Column="9" />
       <File FileName="Assets/MilkTea/Scripts/addmilk.cs" Line="32" Column="22" />
