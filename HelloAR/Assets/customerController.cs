@@ -62,8 +62,13 @@ public class customerController : MonoBehaviour {
     private bool isServed = false;
     private float punishDelta = 0;
 
+    public Image orderImage;
+
+    private int mksize = 0;
+
 	// Use this for initialization
-	void Start () {
+	void Start () { 
+        
 	}
 	
 	// Update is called once per frame
@@ -118,6 +123,9 @@ public class customerController : MonoBehaviour {
         //this.gameObject.SetActive(false);
          
         orderMT.randomReset(Mathf.FloorToInt(Random.Range(3.0f, 5.9f)));   // 随机初始化顾客需求，奶和茶加起来是3到5份
+        //orderMT.randomReset(mksize);   // production
+
+
         isServed = false;
     }
     public bool serveBy(MilkTea mk) {
@@ -148,4 +156,32 @@ public class customerController : MonoBehaviour {
 	{
         Destroy(this.gameObject);
 	}
+
+
+    public void setDifficulty(int _total) {
+
+
+        string filename = "";
+        string foldername = "";
+        switch(_total) {
+            case 3:
+                foldername = "three/";
+                break;
+            case 4:
+                foldername = "four/";
+                break;
+            case 5:
+                foldername = "five/";
+                break;
+
+        }
+        //Sprite sp = Resources.Load("Textrues/yutujing", typeof(Sprite)) as Sprite;
+
+        //orderImage.sprite = sp;
+        mksize = _total;
+
+
+
+    }
 }
+

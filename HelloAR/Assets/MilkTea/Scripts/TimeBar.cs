@@ -20,6 +20,10 @@ public class TimeBar : MonoBehaviour {
     public Button replay;
     public Button submit;
     public Button redo;
+    public Button exit;
+
+    public Slider difficulty;
+    public GameObject difficultyGroup;
 
 
     public GameObject customerGroup;  
@@ -30,11 +34,13 @@ public class TimeBar : MonoBehaviour {
     public GameObject TeaButton;
     public GameObject MilkButton;
 
+
 	// Use this for initialization
 	void Start () {
 		button.onClick.AddListener(onClicked);
         replay.onClick.AddListener(onReplay);
         submit.onClick.AddListener(onSubmit);
+        exit.onClick.AddListener(onExit);
 
 	}
 	
@@ -98,10 +104,36 @@ public class TimeBar : MonoBehaviour {
         isFound = true;
         selfCounter = 0.0f;
         button.GetComponent<Button>().gameObject.SetActive(false);
-        customerGroup.GetComponent<CustomerSystemController>().run();
         submit.GetComponent<Button>().gameObject.SetActive(true);
         redo.GetComponent<Button>().gameObject.SetActive(true);
+
+        customerGroup.GetComponent<CustomerSystemController>().setDifficulty( Mathf.FloorToInt(difficulty.value) );
+        customerGroup.GetComponent<CustomerSystemController>().run();
+
+
+        difficultyGroup.SetActive(false);
+
 	}
+    void onExit(){
+        isBegin = false;
+        isFinish = false;
+        difficultyGroup.SetActive(true);
+
+
+        button.GetComponent<Button>().gameObject.SetActive(true);
+
+        submit.GetComponent<Button>().gameObject.SetActive(false);
+        redo.GetComponent<Button>().gameObject.SetActive(false);
+
+        customerGroup.GetComponent<CustomerSystemController>().end();
+
+        win.GetComponent<Text>().gameObject.SetActive(false);
+        gameOver.gameObject.SetActive(false);
+
+
+        state = 0;
+
+    }
     void onReplay() {
         Debug.Log("> Game Restart. ");
         state = 0;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 
@@ -19,6 +20,8 @@ public class addTea : MonoBehaviour {
 	public Material two_of_fiveTea;
 	public Material three_of_fiveTea;
 	public Material four_of_fiveTea;
+    public Slider difficulty;
+
 
 	// Use this for initialization
 	void Start () {
@@ -33,7 +36,7 @@ public class addTea : MonoBehaviour {
         
 
 
-            if (amount.teaNum + amount.milkNum < 5)
+        if (amount.teaNum + amount.milkNum < Mathf.FloorToInt(difficulty.value))
         {
             amount.teaNum++;
 

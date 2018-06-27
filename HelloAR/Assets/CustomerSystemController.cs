@@ -19,6 +19,8 @@ public class CustomerSystemController : MonoBehaviour {
     public GameObject[] _customers;
     public int targetCustomerNumber;
 
+    private int _mksize = -1;
+
 	void Start () {
         currentCustomer = null;
 	}
@@ -39,7 +41,7 @@ public class CustomerSystemController : MonoBehaviour {
         } 
 
 
-        counter.GetComponent<Text>().text = "Score: " + successCustomerCnt.ToString();
+        counter.GetComponent<Text>().text = "Scores: " + successCustomerCnt.ToString();
 
         // check customers
 
@@ -59,6 +61,9 @@ public class CustomerSystemController : MonoBehaviour {
         return successCustomerCnt >=  targetCustomerNumber;
     }
 
+    public void setDifficulty(int val) {
+        _mksize = val;
+    }
    
     public void run() {
         //Debug.Log("> Customer system is running. ");
@@ -93,7 +98,10 @@ public class CustomerSystemController : MonoBehaviour {
         //    cus.kill();
         //    //cus.destroy();
         //}
-        if (currentCustomer) currentCustomer.GetComponent<customerController>().kill();
+        if (currentCustomer) {
+            currentCustomer.GetComponent<customerController>().kill();
+            currentCustomer.GetComponent<customerController>().destroy();
+        }
         createdCustomerCnt = 0;
         successCustomerCnt = 0;
         isRun = false;
@@ -165,6 +173,8 @@ public class CustomerSystemController : MonoBehaviour {
 
         clone.transform.parent = container.transform;
         clone.transform.localScale = _customer.transform.localScale;
+
+        clone.GetComponent<customerController>().setDifficulty(_mksize);
         clone.GetComponent<customerController>().run();
         currentCustomer = clone;
         createdCustomerCnt++;
