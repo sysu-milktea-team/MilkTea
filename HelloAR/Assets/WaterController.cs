@@ -119,6 +119,7 @@ public class WaterController : MonoBehaviour {
 
     public void changeSideFood(int val) {
         mk.setSideFood(val);
+        Debug.LogFormat("> WATER_CTRLER: mk.sidefood = {0}", mk.getSideFood());
         // 控制各种配料的显示（只能加一种）
         pearls.SetActive(false);
         boba.SetActive(false);
@@ -126,13 +127,29 @@ public class WaterController : MonoBehaviour {
         switch(val) {
             case 0: // pearls
                 pearls.SetActive(true);
+                resetPos(pearls);
                 break;
             case 1: // boba
                 boba.SetActive(true);
+                resetPos(boba);
+
                 break;
             case 2: // milkgai
                 milkgai.SetActive(true);
+                //resetPos(milkgai);
                 break;
+        }
+
+    }
+    private void resetPos(GameObject o) {
+        Transform t = o.transform;
+        for (int i = 0; i < t.childCount; i++) {
+            Transform ct = t.GetChild(i);
+            GameObject child = ct.gameObject;
+
+            Vector3 oldpos = child.transform.position;
+            Vector3 newpos = new Vector3(oldpos.x, 15.6f + Random.RandomRange(-0.3f,0.3f), oldpos.z);
+            child.transform.position = newpos;
         }
     }
 }
