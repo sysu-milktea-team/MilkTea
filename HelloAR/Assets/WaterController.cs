@@ -148,7 +148,7 @@ public class WaterController : MonoBehaviour {
             GameObject child = ct.gameObject;
 
             Vector3 oldpos = child.transform.position;
-            Vector3 newpos = new Vector3(oldpos.x, 15.6f + Random.RandomRange(-0.3f,0.3f), oldpos.z);
+            Vector3 newpos = new Vector3(oldpos.x, 13.6f + Random.RandomRange(-0.3f,0.3f), oldpos.z);
             child.transform.position = newpos;
         }
     }

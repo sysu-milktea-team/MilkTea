@@ -33,9 +33,11 @@ public class TimeBar : MonoBehaviour {
     public Text gameOver;
     public Text win;
     public Text target;
+    public Text scoreHint;
+
+
     public GameObject TeaButton;
     public GameObject MilkButton;
-
     public GameObject itemGroup;
 
     private int score = 0;
@@ -80,11 +82,13 @@ public class TimeBar : MonoBehaviour {
                     // 在一局游戏结束之前全部服务成功
                     // 显示胜利提示信息
                     win.GetComponent<Text>().gameObject.SetActive(true);
-
+                    scoreHint.text = score.ToString();
+                    scoreHint.gameObject.SetActive(true);
                 } else {
                     gameOver.GetComponent<Text>().gameObject.SetActive(true);
                     gameOver.gameObject.SetActive(true);
-                    
+                    scoreHint.gameObject.SetActive(false);
+
                 }
                 isBegin = false;
                 isFinish = true;
