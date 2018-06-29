@@ -92,11 +92,13 @@ public class CustomerSystemController : MonoBehaviour {
         this.gameObject.SetActive(true);
         beginTime = Time.time;
         isRun = true;
+        successCustomerCnt = 0;
 
         if (currentCustomer)
         {
             currentCustomer.GetComponent<customerController>().kill();
             currentCustomer.GetComponent<customerController>().destroy();
+
         }
         currentCustomer = null;
 
@@ -150,31 +152,37 @@ public class CustomerSystemController : MonoBehaviour {
 
     public void submit(MilkTea mk) {
         bool isServed = false;
+        Debug.LogFormat("> CUSTOMER_SYSTEM: SUBMIT, current =  {0} ", currentCustomer != null);
+
         if (currentCustomer != null) {
             isServed = currentCustomer.GetComponent<customerController>().serveBy(mk);
-            
+            if (isServed)
+            {
+
+                successCustomerCnt++;
+                //counter.GetComponent<CounterController>().addScore(); 
+                Debug.LogFormat("> CUSTOMER_SYSTEM: SERVED, already serve {0} ", successCustomerCnt);
+                // 客人得到正确奶茶时消失
+
+
+                servedCustomer();
+
+            }
+            else
+            {
+                // 如果提交的奶茶不符合当前客人的要求
+                if (currentCustomer.GetComponent<customerController>().isEnd() == true)
+                {
+                    servedCustomer();
+                    // 客人没有得到正确的奶茶但计时结束时消失
+
+                }
+
+            }
         }
-        if (isServed) { 
-
-            successCustomerCnt++;
-            //counter.GetComponent<CounterController>().addScore(); 
-            Debug.LogFormat("> CUSTOMER_SYSTEM: SERVED, already serve {0} ", successCustomerCnt);
-            // 客人得到正确奶茶时消失
 
 
-            servedCustomer();
 
-        } else {
-            // 如果提交的奶茶不符合当前客人的要求
-
-
-        }
-
-        if (currentCustomer.GetComponent<customerController>().isEnd() == true) {
-            servedCustomer();
-            // 客人计时结束时消失
-
-        }
 
         water.GetComponent<WaterController>().reset();
     }
@@ -183,7 +191,6 @@ public class CustomerSystemController : MonoBehaviour {
 
         if (!isRun) return;
 
-        Debug.Log("> CUS_SYS: Creating customer.");
         int ptr = Mathf.FloorToInt(_customers.Length * Random.Range(0.0f, 0.99f));
         GameObject _customer = _customers[ptr];
 
@@ -194,9 +201,13 @@ public class CustomerSystemController : MonoBehaviour {
         clone.transform.parent = container.transform;
         clone.transform.localScale = _customer.transform.localScale;
 
+        clone.SetActive(true);
         clone.GetComponent<customerController>().setDifficulty(_mksize);
         clone.GetComponent<customerController>().run();
         currentCustomer = clone;
+        Debug.LogFormat("> CUS_SYS container = {0}", container != null);
+        Debug.LogFormat("> CUS_SYS: Creating customer.  current = {0}", currentCustomer != null);
+
         createdCustomerCnt++;
 
     }

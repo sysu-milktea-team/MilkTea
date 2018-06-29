@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: 49666e747ebca4eb1a483ccb63123d53
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: HappyZcool-2016
+  fontNames:
+  - HappyZcool-2016
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 283695389646e4926907758ecb347baa, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

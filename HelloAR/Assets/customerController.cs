@@ -161,6 +161,7 @@ public class customerController : MonoBehaviour {
 
 	public void destroy()
 	{
+        Debug.Log("> CUS_CTRLER: DESTROYED.");
         Destroy(this.gameObject);
 	}
 
@@ -194,7 +195,7 @@ public class customerController : MonoBehaviour {
         Sprite sp = Resources.Load(foldername + orderTea.ToString(), typeof(Sprite)) as Sprite;
 
 
-        Debug.LogFormat("> CUSTOMER_CTRLER: " + foldername + orderTea.ToString() + "sp == none? {0}", sp==null);
+        //Debug.LogFormat("> CUSTOMER_CTRLER: " + foldername + orderTea.ToString() + "sp == none? {0}", sp==null);
         string sifo = "";
         int sidenum = orderMT.getSideFood();
         switch(sidenum) {
