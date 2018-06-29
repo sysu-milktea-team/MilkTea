@@ -21,7 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: ca30768487e7357448344b6fa7f5cd61, type: 3}
+        m_Texture: {fileID: 2800000, guid: 605c4c2fb4f26c14aba1b1f0a843b8e5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -89,20 +89,20 @@ Material:
     - _MKEditorShowRimBehavior: 1
     - _MKEditorShowSpecularBehavior: 1
     - _MKEditorShowTranslucentBehavior: 0
-    - _MainTint: 0.68
+    - _MainTint: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _ReflectIntensity: 0.205
     - _RenderMode: 0
-    - _RimIntensity: 1
+    - _RimIntensity: 0.709
     - _RimSize: 3.75
     - _ShadowIntensity: 0.1
-    - _Shininess: 0.42
+    - _Shininess: 0.037
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
-    - _SpecularIntensity: 1.01
+    - _SpecularIntensity: 0.61
     - _SrcBlend: 1
     - _TranslucentIntensity: 0.5
     - _TranslucentShininess: 0.275

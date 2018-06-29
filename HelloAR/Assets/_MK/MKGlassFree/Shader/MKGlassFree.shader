@@ -9,7 +9,7 @@
 		[Toggle] _AlbedoMap ("Color source map", int) = 0
 
 		//Normalmap
-		// _BumpMap ("Normalmap", 2D) = "bump" {}
+		_BumpMap ("Normalmap", 2D) = "bump" {}
 		_Distortion("Distortion", Range(0,1)) = 0.30
 
 		//Specular

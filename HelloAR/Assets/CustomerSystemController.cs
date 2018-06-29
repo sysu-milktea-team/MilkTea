@@ -16,7 +16,7 @@ public class CustomerSystemController : MonoBehaviour {
 
     public GameObject water;
     public GameObject[] _customers;
-    public int targetCustomerNumber;
+    private int targetCustomerNumber = 3;
 
     private int _mksize = -1;
 
@@ -29,6 +29,12 @@ public class CustomerSystemController : MonoBehaviour {
         currentCustomer = null;
 	}
 	
+    public int getTargetCustomers() {
+        return targetCustomerNumber;
+    }
+
+
+
 	// Update is called once per frame
 	void Update () {
 
@@ -66,8 +72,17 @@ public class CustomerSystemController : MonoBehaviour {
 
     public void setDifficulty(int val) {
         _mksize = val;
+
+        targetCustomerNumber = 3 + val * 2; // temporary
     }
    
+
+    public void setTarget(int t)
+    {
+        targetCustomerNumber = t;
+    }
+
+
     public void run() {
         //Debug.Log("> Customer system is running. ");
         //Invoke("checkPossibleCustomer", 0.0f);

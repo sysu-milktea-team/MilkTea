@@ -63,6 +63,7 @@ public class customerController : MonoBehaviour {
     private float punishDelta = 0;
 
     public GameObject orderSprite;
+    public GameObject sideSprite;
 
     private int mksize = 0;
 
@@ -195,9 +196,11 @@ public class customerController : MonoBehaviour {
 
         Debug.LogFormat("> CUSTOMER_CTRLER: " + foldername + orderTea.ToString() + "sp == none? {0}", sp==null);
         string sifo = "";
-        switch(orderMT.getSideFood()) {
+        int sidenum = orderMT.getSideFood();
+        switch(sidenum) {
             case 0:
                 sifo = "PEARL";
+
                 break;
             case 1:
                 sifo = "BOBA";
@@ -206,10 +209,16 @@ public class customerController : MonoBehaviour {
                 sifo = "MILK";
                 break;
         }
+        Sprite sidesp = Resources.Load("ext/" + sidenum.ToString(), typeof(Sprite)) as Sprite;
+
+
+
         Debug.LogFormat("> CUSTOMER_CTRLER CREATED, Tea = {0}, Milk = {1}, side = {2}.", orderTea, orderMT.getMilk(), sifo);
         orderSprite.GetComponent<SpriteRenderer>().sprite = sp;
         orderSprite.GetComponent<Transform>().localScale = new Vector3(0.25f, 0.25f, 0.25f);
 
+        sideSprite.GetComponent<SpriteRenderer>().sprite = sidesp;
+        sideSprite.GetComponent<Transform>().localScale = new Vector3(0.25f, 0.25f, 0.25f);
 
 
     }

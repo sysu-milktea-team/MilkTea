@@ -17,6 +17,7 @@ public class TimeBar : MonoBehaviour {
 	public Image progress;
 	public float waitTime = 5.0f;
     public Button button;
+    public Button next;
     public Button replay;
     public Button submit;
     public Button redo;
@@ -40,7 +41,10 @@ public class TimeBar : MonoBehaviour {
     public GameObject MilkButton;
     public GameObject itemGroup;
 
-    private int score = 0;
+    private int currentScore = 0;
+    private int totalScore = 0;
+
+    public int stages = 2;
 
 	// Use this for initialization
 	void Start () {
@@ -53,7 +57,7 @@ public class TimeBar : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        counter.GetComponent<Text>().text = "Scores: " + score.ToString();
+        counter.GetComponent<Text>().text = "当前局得分: " + currentScore.ToString();
 
         bool begins = isBegin && isFound;
         TeaButton.SetActive(begins);
@@ -62,14 +66,14 @@ public class TimeBar : MonoBehaviour {
 
 
         if (begins) {
-            target.GetComponent<Text>().text = customerGroup.GetComponent<CustomerSystemController>().targetCustomerNumber.ToString();
+            target.GetComponent<Text>().text = customerGroup.GetComponent<CustomerSystemController>().getTargetCustomers().ToString();
 
             selfCounter +=  Time.deltaTime;
             state = (selfCounter - 0) / waitTime;
             //Debug.LogFormat("selfCounter={0},  state={1}", selfCounter, state);
 			progress.fillAmount = 1-state;
 
-            score = customerGroup.GetComponent<CustomerSystemController>().getSuccessedCustomers();
+            currentScore = customerGroup.GetComponent<CustomerSystemController>().getSuccessedCustomers();
 
 
             if (progress.fillAmount <= 0.005) {
@@ -81,9 +85,7 @@ public class TimeBar : MonoBehaviour {
                     //Debug.Log("> TIME_BAR: GAME WIN.");
                     // 在一局游戏结束之前全部服务成功
                     // 显示胜利提示信息
-                    win.GetComponent<Text>().gameObject.SetActive(true);
-                    scoreHint.text = score.ToString();
-                    scoreHint.gameObject.SetActive(true);
+                    showWin();
                 } else {
                     gameOver.GetComponent<Text>().gameObject.SetActive(true);
                     gameOver.gameObject.SetActive(true);
@@ -111,9 +113,29 @@ public class TimeBar : MonoBehaviour {
         }
 	}
 
+    private void showWin() {
+        totalScore += currentScore;
+        win.GetComponent<Text>().gameObject.SetActive(true);
+        scoreHint.text =  totalScore.ToString();
+        scoreHint.gameObject.SetActive(true);
+    }
+
 	void onClicked() {
-        Debug.Log("> Start Clicked");
-        beginTime = Time.time; 
+        Debug.Log("> GAME Start Clicked");
+
+        RoundStart();
+
+        customerGroup.GetComponent<CustomerSystemController>().setDifficulty(Mathf.FloorToInt(difficulty.value)); // set once
+        customerGroup.GetComponent<CustomerSystemController>().run();
+
+
+        difficultyGroup.SetActive(false);
+
+	}
+
+    void RoundStart() {
+        Debug.Log("> Round Start Clicked");
+        beginTime = Time.time;
         isBegin = true;
         isFound = true;
         selfCounter = 0.0f;
@@ -122,14 +144,23 @@ public class TimeBar : MonoBehaviour {
         redo.GetComponent<Button>().gameObject.SetActive(true);
         itemGroup.SetActive(true);
 
-        customerGroup.GetComponent<CustomerSystemController>().setDifficulty( Mathf.FloorToInt(difficulty.value) );
-        customerGroup.GetComponent<CustomerSystemController>().run();
+        //customerGroup.GetComponent<CustomerSystemController>().setTarget(targetNumber); // TO DO
 
+    }
 
-        difficultyGroup.SetActive(false);
+    void onNextStage() {
+        while(stages > 0) {
+            stages--;
 
-	}
-    void onExit(){
+            this.waitTime -= 5.0f;
+            RoundStart();
+            // next.GetComponent<Button>().gameObject.SetActive(true);
+
+        }
+
+    }
+
+	void onExit(){
         isBegin = false;
         isFinish = false;
         difficultyGroup.SetActive(true);
@@ -141,6 +172,7 @@ public class TimeBar : MonoBehaviour {
 
         submit.GetComponent<Button>().gameObject.SetActive(false);
         redo.GetComponent<Button>().gameObject.SetActive(false);
+        replay.GetComponent<Button>().gameObject.SetActive(false);
 
         customerGroup.GetComponent<CustomerSystemController>().end();
 
