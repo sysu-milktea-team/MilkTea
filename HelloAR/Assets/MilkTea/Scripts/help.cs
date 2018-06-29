@@ -18,6 +18,6 @@ public class help : MonoBehaviour {
 
 	}
 	void myClick(){
-		Text.GetComponent<Text> ().text = "help: ";
+		Text.GetComponent<Text> ().text = "Help: By tapping at certain buttons on the screen, you should add accurate amount of tea or milk into the cup, as well as one material, including pearls, nata and cover, so that you can increase your score. And you can also choose the levels for the game through tapping at the scroller. And if you want to quit, just tap at the right corner exit button. Hope you enjoy the game.";
 	}
 }

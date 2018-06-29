@@ -18,7 +18,7 @@ public class home : MonoBehaviour {
 
 	}
 	void myClick(){
-		Text.GetComponent<Text> ().text = "this is the introduction of the game ";
+		Text.GetComponent<Text> ().text = "About: This is an AR game about running a milktea shop. You should provide the customers with their desirable drinks in a limited period. And there are three levels of difficulties designed for the game. Created by FiveGreeners.";
 	}
 }
 
